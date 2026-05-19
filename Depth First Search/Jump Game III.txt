@@ -1,0 +1,38 @@
+/*
+Question: Jump Game III
+Difficulty: Medium
+
+Topics:
+- Array
+- Depth-First Search
+- Breadth-First Search
+
+Language: cpp
+
+Time Complexity: O(v+e)
+Space Complexity: O(v)
+
+Runtime: 2
+Memory: 39520000
+
+Link:
+https://leetcode.com/problems/jump-game-iii/
+*/
+
+class Solution {
+public:
+    bool dfs(vector<int>& arr, int idx,vector<bool>& vis){
+        if(idx < 0 || idx >= arr.size() || vis[idx]) return false;
+
+        if(arr[idx] == 0) return true;
+
+        vis[idx] = true;
+
+        return dfs(arr, idx + arr[idx], vis) || dfs(arr ,idx - arr[idx], vis);
+    }
+    bool canReach(vector<int>& arr, int start) {
+
+        vector<bool> vis(arr.size(),false);
+        return dfs(arr,start,vis);
+    }
+};
