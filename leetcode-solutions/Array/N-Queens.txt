@@ -1,0 +1,73 @@
+/*
+Question: N-Queens
+Difficulty: Hard
+
+Topics:
+- Array
+- Backtracking
+
+Language: java
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Runtime: null
+Memory: null
+
+Link:
+https://leetcode.com/problems/n-queens/
+*/
+
+public class Solution {
+    public ArrayList<ArrayList<String>>solveNQueens(int n){
+        ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
+        ArrayList<String> rowSol = new ArrayList<String>();
+        helper(0, n, rowSol, board);
+        return board;
+    } 
+    
+    public void helper(int row, int queens,ArrayList<String> rowSol, ArrayList<ArrayList<String>> board){
+        if(row == queens){
+            ArrayList<String> s = new ArrayList<String>();
+            s.addAll(rowSol)
+            board.add(s);
+            return; 
+        }else{
+            for(int i = 0; i < queens; i++){
+                if(check(row, i, rowSol)){
+                    StringBuffer str = new StringBuffer();
+                    for(int q = 0; q < queens-1; q++){
+                        str.append('.');
+                    }
+                    str.insert(i,'Q');
+                    ArrayList<String> temp = new ArrayList<String>();
+                    temp.addAll(rowSol);
+                    temp.add(str.toString());
+                    helper(row + 1, queens, temp, board);
+                }
+            }
+        }
+    } 
+    public boolean check(int row, int col, ArrayList<String> rowSol){
+        // curr position is row and col
+        
+        // check if the same column has a queen
+        for(int i = 0; i < row; i++){
+            String s = rowSol.get(i);
+            if(s.charAt(col) == 'Q') return false;
+        }
+        
+        // check if other queen is in diagnol
+        for(int i = 0; i < row; i++){
+            String s = rowSol.get(i);
+            for(int j = 0; j< rowSol.length(); j++){
+                if(s.charAt(j) == 'Q'){
+                    int distrow = Math.abs(j - col);
+                    int distcol = Math.abs(row - i);
+                    if(distrow == distcol) return false;
+                }
+            }
+        }
+        return true;
+    }
+}
