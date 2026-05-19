@@ -1,0 +1,40 @@
+/*
+Question: Minimum Common Value
+Difficulty: Easy
+
+Topics:
+- Array
+- Hash Table
+- Two Pointers
+- Binary Search
+
+Language: cpp
+
+Time Complexity: O(n+m)
+Space Complexity: O(1)
+
+Runtime: 49
+Memory: 69656000
+
+Link:
+https://leetcode.com/problems/minimum-common-value/
+*/
+
+class Solution {
+public:
+    int getCommon(vector<int>& nums1, vector<int>& nums2) {
+
+    unordered_set<int> st;
+    for(int x : nums1){
+        st.insert(x);
+    }
+
+    int minCom = INT_MAX;
+
+    for(int x : nums2){
+        if(st.count(x)) 
+            minCom = min(minCom,x);
+    }
+        return minCom == INT_MAX?-1:minCom;
+    }
+};
