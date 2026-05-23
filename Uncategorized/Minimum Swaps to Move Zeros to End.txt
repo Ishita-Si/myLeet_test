@@ -1,0 +1,33 @@
+/*
+Question: Minimum Swaps to Move Zeros to End
+Difficulty: Easy
+
+Topics:
+
+Language: cpp
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Runtime: 0
+Memory: 31656000
+
+Link:
+https://leetcode.com/problems/minimum-swaps-to-move-zeros-to-end/
+*/
+
+class Solution {
+public:
+    int minimumSwaps(vector<int>& nums) {
+        int zeros = 0;
+        for (int x : nums)
+            if (x == 0)
+                zeros++;
+        int swaps = 0;
+        for (int i = nums.size() - zeros; i < nums.size(); i++) {
+            if (i >= 0 && nums[i] != 0)
+                swaps++;
+        }
+        return swaps;
+    }
+};
