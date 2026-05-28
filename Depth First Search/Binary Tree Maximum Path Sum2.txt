@@ -1,0 +1,63 @@
+/*
+Question: Binary Tree Maximum Path Sum
+Difficulty: Hard
+
+Topics:
+- Dynamic Programming
+- Tree
+- Depth-First Search
+- Binary Tree
+
+Language: java
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Runtime: null
+Memory: null
+
+Link:
+https://leetcode.com/problems/binary-tree-maximum-path-sum/
+*/
+
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public int maxPathSum(TreeNode root) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(root == null){
+            return 0;
+        }
+        int sumleft = maxPathSum(root.left);
+        int sumright = maxPathSum(root.right);
+        if(sumleft>0 && sumright>0 && root.val>0){
+            return sumleft+sumright+root.val;
+        }else if(sumleft<0 && sumright<0 && root.val<0){
+            return max(sumleft,sumright,root.val);
+        }else if(sumleft<0 || sumright<0 && root.val<0){
+            return max(sumleft,sumright,sumleft+sumright);
+        }else if(root.val<0 && sumleft>0 && sumright>0){
+            return sumleft+sumright;
+        }else if(root.val>0 && sumleft<0 || sumright<0){
+            return max(root.val,sumleft+root.val,root.val+sumright);
+        }
+        return root.val;
+    }
+    public int max(int i,int j,int k){
+        int max = i;
+        if(j>max){
+            max=j;
+        }
+        else if(k>max){
+            max=k;
+        }
+        return max;
+    }
+}
