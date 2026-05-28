@@ -1,0 +1,49 @@
+/*
+Question: Palindrome Linked List
+Difficulty: Easy
+
+Topics:
+- Linked List
+- Two Pointers
+- Stack
+- Recursion
+
+Language: cpp
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+Runtime: null
+Memory: null
+
+Link:
+https://leetcode.com/problems/palindrome-linked-list/
+*/
+
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        stack<ListNode*> st;
+
+        if(head == NULL) return true;
+
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast != NULL && fast -> next != NULL){
+            st.push(slow);
+            slow = slow -> next;
+            fast = fast -> next -> next;
+        }
+        if(fast != NULL){
+            slow = slow->next;
+        }
+        while(!st.empty()){
+            if(st.top() -> val != slow -> val) return false;
+            st.pop();
+            if(slow -> next != NULL)
+                slow = slow -> next;
+        }
+    return true;
+
+    }
+};
