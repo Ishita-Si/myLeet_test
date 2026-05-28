@@ -1,0 +1,67 @@
+/*
+Question: Maximum Twin Sum of a Linked List
+Difficulty: Medium
+
+Topics:
+- Linked List
+- Two Pointers
+- Stack
+
+Language: cpp
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Runtime: 4
+Memory: 124396000
+
+Link:
+https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/
+*/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverse(ListNode* head){
+        ListNode* curr = head;
+        ListNode* prev = NULL;
+        while(curr != NULL){
+            ListNode* nextNode = curr -> next;
+            curr -> next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        return prev;
+    }
+
+    int pairSum(ListNode* head) {
+        int maxSum = 0;
+        if(head == NULL || head -> next == NULL) return head -> val;
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while(fast != NULL && fast -> next != NULL){
+            slow = slow -> next;
+            fast = fast -> next -> next;
+        }
+        ListNode* first = head;
+        ListNode* sec = reverse(slow);
+        while(sec != NULL){
+            int sum = first -> val + sec -> val;
+            maxSum = max(maxSum, sum);
+            sec = sec -> next;
+            first = first -> next;
+        }
+
+        return maxSum;
+    }
+};
