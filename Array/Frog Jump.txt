@@ -1,0 +1,64 @@
+/*
+Question: Frog Jump
+Difficulty: Hard
+
+Topics:
+- Array
+- Dynamic Programming
+
+Language: cpp
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Runtime: 91
+Memory: 262048000
+
+Link:
+https://leetcode.com/problems/frog-jump/
+*/
+
+class Solution {
+public:
+    int n;
+    vector<int> stones;
+    unordered_map<int, int> pos;
+    vector<vector<int>> dp;
+
+    bool solve(int i, int k) {
+        if (i == n - 1)
+            return true;
+
+        if (dp[i][k] != -1)
+            return dp[i][k];
+
+        for (int jump = k - 1; jump <= k + 1; jump++) {
+            if (jump <= 0)
+                continue;
+
+            int nextPos = stones[i] + jump;
+
+            if (pos.count(nextPos)) {
+                int nextIndex = pos[nextPos];
+
+                if (solve(nextIndex, jump))
+                    return dp[i][k] = true;
+            }
+        }
+
+        return dp[i][k] = false;
+    }
+
+    bool canCross(vector<int>& s) {
+        stones = s;
+        n = stones.size();
+
+        for (int i = 0; i < n; i++) {
+            pos[stones[i]] = i;
+        }
+
+        dp.assign(n, vector<int>(n + 1, -1));
+
+        return solve(0, 0);
+    }
+};
