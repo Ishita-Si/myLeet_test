@@ -1,0 +1,45 @@
+/*
+Question: Left and Right Sum Differences
+Difficulty: Easy
+
+Topics:
+- Array
+- Prefix Sum
+
+Language: cpp
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+Runtime: null
+Memory: null
+
+Link:
+https://leetcode.com/problems/left-and-right-sum-differences/
+*/
+
+class Solution {
+public:
+    vector<int> leftRightDifference(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> left(n, 0);
+        vector<int> right(n, 0);
+        vector<int> ans(n, 0);
+
+        if(n == 1) return ans;
+
+        left[1] = nums[0];
+        right[n-2] = nums[n-1];
+
+        for(int i = 2; i < n; ++i){
+            left[i] = left[i-1] + nums[i-1];
+            right[n-i-1] = right[n-i] + nums[n-i];
+        }
+
+        for (int i = 0; i < n; i++) {
+            ans[i] = abs(left[i] - right[i]);
+        }
+
+        return ans;
+    }
+};
