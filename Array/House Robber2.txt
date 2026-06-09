@@ -1,0 +1,39 @@
+/*
+Question: House Robber
+Difficulty: Medium
+
+Topics:
+- Array
+- Dynamic Programming
+
+Language: cpp
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+Runtime: 0
+Memory: 10824000
+
+Link:
+https://leetcode.com/problems/house-robber/
+*/
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        
+        int n = nums.size();
+        vector<int> dp(n,-1);
+
+        dp[0] = nums[0];
+
+        for(int idx = 1 ; idx < nums.size(); idx++){
+            int house = nums[idx];
+            if(idx > 1) house +=  dp[idx - 2];
+            int notHouse = 0 + dp[idx - 1];
+
+            dp[idx] = max(house, notHouse);
+        }
+        return dp[n-1];
+    }
+};
