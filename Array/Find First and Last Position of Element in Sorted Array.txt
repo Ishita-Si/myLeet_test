@@ -1,0 +1,73 @@
+/*
+Question: Find First and Last Position of Element in Sorted Array
+Difficulty: Medium
+
+Topics:
+- Array
+- Binary Search
+
+Language: java
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Runtime: 344
+Memory: null
+
+Link:
+https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+*/
+
+// Do it again!
+public class Solution {
+    public int[] searchRange(int[] A, int target) {
+        int[] result = new int[2];
+        if (A.length == 0) {
+            result[0] = -1;
+            result[1] = -1;
+            return result;
+        }
+        
+        int left = findLeft(A, target);
+        if (left == -1) {
+            result[0] = -1;
+            result[1] = -1;
+            return result;
+        }
+        int right = findRight(A, target, left);
+        result[0] = left;
+        result[1] = right;
+        return result;
+    }
+    
+    public int findLeft(int[] array, int target) {
+        int start = 0;
+        int end = array.length - 1;
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            if (array[mid] >= target) {
+                end = mid;
+            } else {
+                start = mid + 1;
+            }
+        }
+        if (array[start] == target)
+            return start;
+        else
+            return -1;
+    }
+    
+    public int findRight(int[] array, int target, int left) {
+        int start = left;
+        int end = array.length - 1;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (array[mid] <= target) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+        return start - 1;
+    }
+}
