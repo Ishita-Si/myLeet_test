@@ -1,0 +1,44 @@
+/*
+Question: Longest Palindrome
+Difficulty: Easy
+
+Topics:
+- Hash Table
+- String
+- Greedy
+
+Language: cpp
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Runtime: 8
+Memory: 11016000
+
+Link:
+https://leetcode.com/problems/longest-palindrome/
+*/
+
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        unordered_map<char, int> mpp;
+
+        for (char x : s) {
+            mpp[x]++;
+        }
+        int count = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            
+            count += (mpp[s[i]] / 2) * 2;
+            mpp.erase(s[i]);
+        }
+
+        if (count < s.length()) {
+            return count + 1;
+        }
+
+        return count;
+    }
+};
