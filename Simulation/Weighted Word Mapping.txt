@@ -1,0 +1,38 @@
+/*
+Question: Weighted Word Mapping
+Difficulty: Easy
+
+Topics:
+- Array
+- String
+- Simulation
+
+Language: cpp
+
+Time Complexity: O(n2)
+Space Complexity: O(1)
+
+Runtime: 0
+Memory: 43732000
+
+Link:
+https://leetcode.com/problems/weighted-word-mapping/
+*/
+
+class Solution {
+public:
+    string mapWordWeights(vector<string>& words, vector<int>& weights) {
+        string t;
+        int i = 0;
+        for(string x : words){
+            int count = 0;
+            for(char y : x){
+                count += weights[y-'a'];
+            }
+            char z = 'a' + 25 - count%26;
+
+            t.push_back(z);
+        }
+        return t;
+    }
+};
