@@ -1,0 +1,43 @@
+/*
+Question: Minimum Hours of Training to Win a Competition
+Difficulty: Easy
+
+Topics:
+- Array
+- Greedy
+
+Language: cpp
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Runtime: 0
+Memory: 14692000
+
+Link:
+https://leetcode.com/problems/minimum-hours-of-training-to-win-a-competition/
+*/
+
+class Solution {
+public:
+    int minNumberOfHours(int initialEnergy, int initialExperience, vector<int>& energy, vector<int>& experience) {
+        int exp = initialExperience;
+        int sum = 0;
+        for(int x : energy){
+            sum += x;
+        }
+        int expt = 0;
+        for(int i = 0; i < experience.size(); i++){
+            if(exp > experience[i]){
+                exp += experience[i];
+            }
+            else if(exp <= experience[i]){
+                int deficit = experience[i] - exp + 1;
+                expt += deficit;
+                exp += deficit + experience[i];
+            }
+        }
+
+    return  (sum >= initialEnergy) ?(sum - initialEnergy + 1) + expt : expt;
+    }
+};
