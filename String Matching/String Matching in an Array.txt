@@ -1,0 +1,48 @@
+/*
+Question: String Matching in an Array
+Difficulty: Easy
+
+Topics:
+- Array
+- String
+- String Matching
+
+Language: cpp
+
+Time Complexity: O(n2)
+Space Complexity: O(n)
+
+Runtime: null
+Memory: null
+
+Link:
+https://leetcode.com/problems/string-matching-in-an-array/
+*/
+
+class Solution {
+public:
+    vector<string> stringMatching(vector<string>& words) {
+        unordered_map<string,int> mpp;
+        for(string x : words){
+            mpp[x]++;
+        }
+
+        vector<string> result;
+
+        for(int i = 0; i < words.size(); i++){
+            string subWord = words[i];
+            for(int j = 0; j < words.size(); j++){
+                if(i == j) continue;
+
+                string mainWord = words[j];
+                if(mainWord.find(subWord) != string::npos){
+                    result.push_back(subWord);
+                    break;
+                }
+
+            }
+        }
+
+        return result;
+    }
+};
