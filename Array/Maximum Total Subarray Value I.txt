@@ -1,0 +1,33 @@
+/*
+Question: Maximum Total Subarray Value I
+Difficulty: Medium
+
+Topics:
+- Array
+- Greedy
+
+Language: cpp
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Runtime: null
+Memory: null
+
+Link:
+https://leetcode.com/problems/maximum-total-subarray-value-i/
+*/
+
+class Solution {
+public:
+    long long maxTotalValue(vector<int>& nums, int k) {
+        int minElm = INT_MAX;
+        int maxElm = 0;
+        for(int x : nums){
+            maxElm = max(x,maxElm);
+            minElm = min(x,minElm); 
+        }
+
+        return (long long)k * (maxElm - minElm);
+    }
+};
