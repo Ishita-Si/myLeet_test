@@ -1,0 +1,51 @@
+/*
+Question: Reverse Letters Then Special Characters in a String
+Difficulty: Easy
+
+Topics:
+- Two Pointers
+- String
+- Simulation
+
+Language: cpp
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+Runtime: null
+Memory: null
+
+Link:
+https://leetcode.com/problems/reverse-letters-then-special-characters-in-a-string/
+*/
+
+class Solution {
+public:
+    string reverseByType(string s) {
+        stack<char> st1, st2;
+        string ans = "";
+
+        for (char x : s) {
+            if (x >= 'a' && x <= 'z')
+                st1.push(x);
+            else
+                (st2.push(x));
+        }
+
+        for (char x : s) {
+            if (x >= 'a' && x <= 'z') {
+                if (!st1.empty()) {
+                    ans.push_back(st1.top());
+                    st1.pop();
+                }
+            } else {
+                if (!st2.empty()) {
+                    ans.push_back(st2.top());
+                    st2.pop();
+                }
+            }
+        }
+
+        return ans;
+    }
+};
