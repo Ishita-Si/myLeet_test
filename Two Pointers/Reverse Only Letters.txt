@@ -1,0 +1,40 @@
+/*
+Question: Reverse Only Letters
+Difficulty: Easy
+
+Topics:
+- Two Pointers
+- String
+
+Language: cpp
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Runtime: 0
+Memory: 8116000
+
+Link:
+https://leetcode.com/problems/reverse-only-letters/
+*/
+
+class Solution {
+public:
+    string reverseOnlyLetters(string s) {
+        string ans = s;
+        int n = ans.length();
+
+        int alp = n - 1;
+
+        for (int i = 0; i < n; i++) {
+            if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z')) {
+                while (alp >= 0 && !((s[alp] >= 'a' && s[alp] <= 'z')|| (s[alp] >= 'A' && s[alp] <= 'Z'))) {
+                    alp--;
+                }
+                ans[i] = s[alp];
+                alp--;
+            }
+        }
+        return ans;
+    }
+};
