@@ -1,0 +1,50 @@
+/*
+Question: Reverse Letters Then Special Characters in a String
+Difficulty: Easy
+
+Topics:
+- Two Pointers
+- String
+- Simulation
+
+Language: cpp
+
+Time Complexity: O(n2)
+Space Complexity: O(1)
+
+Runtime: 0
+Memory: 8816000
+
+Link:
+https://leetcode.com/problems/reverse-letters-then-special-characters-in-a-string/
+*/
+
+class Solution {
+public:
+    string reverseByType(string s) {
+        // this is a 2 poiten approach where an idx would look for aplh and other for chars from back while normal loop would start from start. we would replace the i with any of the idx suitable . basically in place reversal takes O(N) space for output, O(1) auxiliary.
+
+        string ans = s; 
+        int n = ans.length();
+
+        char alp = n-1;
+        char spChar = n-1;
+
+        for(int i = 0; i < n; i++){
+            if (s[i] >= 'a' && s[i] <= 'z') {
+                while (alp >= 0 && !(s[alp] >= 'a' && s[alp] <= 'z')) {
+                    alp--;
+                }
+                ans[i] = s[alp];
+                alp--;
+            }else{
+                while (spChar >= 0 && (s[spChar] >= 'a' && s[spChar] <= 'z')) {
+                    spChar--;
+                }
+                ans[i] = s[spChar];
+                spChar--;
+            }
+        }
+        return ans;
+    }
+};
