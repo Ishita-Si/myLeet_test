@@ -1,0 +1,34 @@
+/*
+Question: Faulty Keyboard
+Difficulty: Easy
+
+Topics:
+- String
+- Simulation
+
+Language: cpp
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Runtime: null
+Memory: null
+
+Link:
+https://leetcode.com/problems/faulty-keyboard/
+*/
+
+class Solution {
+public:
+    string finalString(string s) {
+        string t = "";
+        for(char x : s){
+            if(x == 'i'){
+                reverse(t.begin(),t.end());
+            }else{
+                t.push_back(x);
+            }
+        }
+        return t;
+    }
+};
