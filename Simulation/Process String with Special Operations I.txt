@@ -1,0 +1,42 @@
+/*
+Question: Process String with Special Operations I
+Difficulty: Medium
+
+Topics:
+- String
+- Simulation
+
+Language: cpp
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+Runtime: 0
+Memory: 39684000
+
+Link:
+https://leetcode.com/problems/process-string-with-special-operations-i/
+*/
+
+class Solution {
+public:
+    string processStr(string s) {
+        string result = "";
+
+        for (char x : s) {
+            if (x == '*'){
+                if (!result.empty()) {
+                    result.pop_back();
+                }
+            }
+            else if (x == '#')
+                result.insert(result.end(), result.begin(), result.end());
+            else if (x == '%')
+                reverse(result.begin(), result.end());
+            else {
+                result.push_back(x);
+            }
+        }
+        return result;
+    }
+};
