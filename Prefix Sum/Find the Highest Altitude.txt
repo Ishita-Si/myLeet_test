@@ -1,0 +1,21 @@
+/*
+Question: Find the Highest Altitude
+Difficulty: Easy
+
+Topics:
+- Array
+- Prefix Sum
+
+Language: cpp
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Runtime: null
+Memory: null
+
+Link:
+https://leetcode.com/problems/find-the-highest-altitude/
+*/
+
+
