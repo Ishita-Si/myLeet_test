@@ -1,0 +1,51 @@
+/*
+Question: Minimum Insertion Steps to Make a String Palindrome
+Difficulty: Hard
+
+Topics:
+- String
+- Dynamic Programming
+
+Language: cpp
+
+Time Complexity: O(n*m)
+Space Complexity: O(n)
+
+Runtime: 18
+Memory: 9696000
+
+Link:
+https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
+*/
+
+class Solution {
+public:
+    int LCS(string s, string t){
+        int n = s.size();
+        int m = t.size();
+
+        vector<int> prev(n+1, 0), curr(m+1, 0);
+
+        for(int i = 1; i <= n; i++){
+            for(int j = 1; j <= m; j++){
+                if(s[i-1] == t[j-1]){
+                    curr[j] = 1 + prev[j-1];
+                }else{
+                    curr[j] = max(prev[j], curr[j-1]);
+                } 
+            }
+            prev = curr;
+        }
+        return prev[m];
+    }
+
+    int isPalindrome(string p){
+        string q = p;
+        reverse(q.begin(), q.end());
+
+        return LCS(p,q);
+    }
+    int minInsertions(string r) {
+        return r.size() - isPalindrome(r);
+    }
+};
